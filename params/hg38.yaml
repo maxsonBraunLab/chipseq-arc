@@ -1,0 +1,32 @@
+# nf-core/chipseq 2.1.0 parameters for human GRCh38 on ARC (MaxsonBraun lab).
+# --input and --outdir are supplied by run_chipseq_arc.sbatch.
+
+aligner: bowtie2
+
+# GRCh38 no-alt analysis set: the FASTA and Bowtie2 index the lab already uses
+# for chip_seq / cutTag-pipeline / atac_seq. bowtie2_index must be a DIRECTORY
+# holding exactly one index: scripts/prepare_reference.sbatch builds a
+# symlink folder for it.
+fasta: /home/groups/MaxsonLab/indices/GRch38/bowtie2/GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta
+bowtie2_index: /home/groups/MaxsonLab/indices/GRch38/nfcore_chipseq/bowtie2
+
+# Gene annotation: the lab's Ensembl 104 GTF (rna_seq pipelines) with contigs
+# renamed 1..22,X,Y,MT -> chr1..chr22,chrX,chrY,chrM to match the FASTA.
+# Written by scripts/prepare_reference.sbatch; the original uses Ensembl names
+# and would match nothing in this genome.
+gtf: /home/groups/MaxsonLab/indices/GRch38/nfcore_chipseq/Homo_sapiens.GRCh38.104.chr.gtf
+
+# ENCODE hg38 blacklist v2 (same file as maxsonBraunLab/chip_seq)
+blacklist: /home/groups/MaxsonLab/indices/GRch38/hg38.blacklist.v2.bed
+
+# MACS3 effective genome size, as in maxsonBraunLab/chip_seq (GSIZE 2.7e9),
+# written out as an integer.
+macs_gsize: 2700000000
+
+# Peak mode applies to the whole run. nf-core defaults to broad; true calls
+# narrow peaks (TFs, H3K27ac, H3K4me3). Set false for H3K27me3 / H3K36me3 /
+# H3K9me3 and run those marks as a separate samplesheet.
+narrow_peak: true
+
+# Peak must be present in this many replicates to enter the consensus set.
+min_reps_consensus: 1

@@ -1,0 +1,7 @@
+# per-run outputs
+results/
+work/
+jobs/
+.nextflow/
+.nextflow.log*
+samplesheet.csv

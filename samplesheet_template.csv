@@ -1,0 +1,5 @@
+sample,fastq_1,fastq_2,replicate,antibody,control,control_replicate
+DMSO_H3K27ac,/abs/path/DMSO_1_H3K27ac_R1.fastq.gz,/abs/path/DMSO_1_H3K27ac_R2.fastq.gz,1,H3K27ac,DMSO_Input,1
+DMSO_H3K27ac,/abs/path/DMSO_2_H3K27ac_R1.fastq.gz,/abs/path/DMSO_2_H3K27ac_R2.fastq.gz,2,H3K27ac,DMSO_Input,2
+DMSO_Input,/abs/path/DMSO_1_Input_R1.fastq.gz,/abs/path/DMSO_1_Input_R2.fastq.gz,1,,,
+DMSO_Input,/abs/path/DMSO_2_Input_R1.fastq.gz,/abs/path/DMSO_2_Input_R2.fastq.gz,2,,,
