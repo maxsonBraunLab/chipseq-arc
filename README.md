@@ -56,7 +56,7 @@ sbatch scripts/prepare_reference.sbatch
 
 ```
 cd /home/groups/MaxsonLab/braun/analysis
-git clone git@github.com:maxsonBraunLab/chipseq-arc.git my_chip_project
+git clone https://github.com/maxsonBraunLab/chipseq-arc.git my_chip_project
 cd my_chip_project
 python3 scripts/make_samplesheet.py /path/to/fastqs --control IgG -o samplesheet.csv
 ```
@@ -94,6 +94,22 @@ To continue after a failure or cancellation, submit again; `-resume` is built in
 Results: `results/multiqc/` (QC report), `results/bowtie2/merged_library/`
 (filtered BAMs, bigWigs, `macs3/` peaks and consensus peak sets),
 `results/pipeline_info/`. Delete the work directory once results are checked.
+
+## Pulling results to the Mac
+
+Run on the Mac (the `arc:` alias does not exist on ARC). This skips BAMs,
+bigWigs, FASTQs, the published genome copy (~3 GB) and the deepTools profile
+matrices (~5 GB), leaving MultiQC, peaks, QC tables and the IGV session:
+
+```
+P=my_chip_project
+rsync -avhP --stats --exclude='*.bam' --exclude='*.bai' --exclude='*.bigWig' --exclude='*.fastq.gz' --exclude='genome/' --exclude='*.mat.tab' --exclude='*.mat.gz' "arc:/home/groups/MaxsonLab/braun/analysis/$P/results/" ~/comp_ws/claude_science/computational_workspace/$P/results/
+```
+
+Set `P` to the project folder name on ARC.
+
+To look at tracks in IGV, pull `results/bowtie2/merged_library/bigwig/`
+separately (about 1 GB for five libraries).
 
 ## Lab choices in this configuration (review)
 
